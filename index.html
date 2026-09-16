@@ -10,29 +10,42 @@
     <header>
       <h1>전국 금연구역 조회 서비스</h1>
       <p>흡연 구역을 피하고 쾌적한 환경을 유지할 수 있으며, 특히 어린이 보호구역이나 공공장소에서의 흡연 예방 효과가 증대됩니다.</p>
+    
+      <nav aria-label="주요 메뉴">
+        <a href="#about">서비스 소개</a>
+        <a href="#features">주요 기능</a>
+        <a href="#steps">이용 방법</a>
+        <a href="#subscribe">소식 받기</a>
+      </nav>
     </header>
 
-    <h2>서비스 소개</h2>
-    <h3>실외 금연구역의 위치·시간·관리기관 등의 정보를 조회할 수 있는 서비스</h3>
- 
-    <img src="assets/images/service.jpg" alt="전국 금연구역 조회 서비스"
->
-    <h2>주요 기능</h2>
-        <ul>
-          <li>
-            <h3>간편 검색 기능</h3>
-            <p>금연구역을 간편하게 검색할 수 있습니다.</p>
-          </li>
-          <li>
-            <h3>상세 검색 기능</h3>
-            <p>시도명, 관리기관 등 여러 항목을 선택하여 상세히 검색할 수 있습니다.</p>
-          </li>
-          <li>
-            <h3>엑셀 저장 기능</h3>
-            <p>조회한 데이터를 엑셀파일로 다운로드 할 수 있습니다.</p>
-          </li>
-        </ul>
+    <main>
+    <section id="about">
+        <h2>서비스 소개</h2>
+        <h3>실외 금연구역의 위치·시간·관리기관 등의 정보를 조회할 수 있는 서비스</h3>
+    
+        <img src="assets/images/service.jpg" alt="전국 금연구역 조회 서비스">
+    </section>
 
+    <section id="features">
+      <h2>주요 기능</h2>
+          <ul>
+            <li>
+              <h3>간편 검색 기능</h3>
+              <p>금연구역을 간편하게 검색할 수 있습니다.</p>
+            </li>
+            <li>
+              <h3>상세 검색 기능</h3>
+              <p>시도명, 관리기관 등 여러 항목을 선택하여 상세히 검색할 수 있습니다.</p>
+            </li>
+            <li>
+              <h3>엑셀 저장 기능</h3>
+              <p>조회한 데이터를 엑셀파일로 다운로드 할 수 있습니다.</p>
+            </li>
+          </ul>
+    </section>
+
+    <section id="steps">
         <h2>이용 방법</h2>
           <ol>
             <li>검색할 단어를 검색칸에 입력합니다.</li>
@@ -40,6 +53,21 @@
             <li>검색 버튼을 눌러 결과를 확인합니다.</li>
             <li>다운로드 버튼을 눌러 엑셀파일로 결과를 확인합니다.</li>
           </ol>
+    </section>
+
+    <section id="subscribe">
+          <h2>소식 받기</h2>
+            <form>
+              <label for="email">이메일</label>
+              <input type="email" id="email" name="email" placeholder="name@example.com">
+              <button type="submit">소식 신청하기</button>
+            </form>
+    </section>
+  </main>
+  <footer>
+    <small>© 2026 전국 금연구역 조회 서비스</small>
+  </footer>
+
   </body>
 
 </html>
