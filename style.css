@@ -89,19 +89,16 @@ p {
   padding-left: 0;
   margin: 0;
 
-  display: flex;
+  display: grid;
 
-  /* 카드가 좁게 눌리지 않고 다음 줄로 이동 */
-  flex-wrap: wrap;
+  /* 들어갈 수 있는 만큼 열을 만들고, 카드 너비는 최소 260px부터 남은 공간까지 사용 */
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 
-  align-items: stretch;
   gap: 24px;
 }
 
 .feature-card {
-    /* 늘어나기 1, 줄어들기 1, 기본너비 260px */
-    flex:1 1 260px;
-    
+    min-width: 0;    
     margin-bottom: 0;
     border: 1px solid #e300ea;
     border-radius: 12px;
@@ -201,16 +198,10 @@ button:active{
     padding: 8px 0;
   }
 
-  /* 기능 카드를 한 열로 배치 */
   .features-list {
-    flex-direction: column;
+    grid-template-columns: 1fr;
   }
 
-  .feature-card {
-    /* 세로 배치에서는 260px을 카드 높이로 사용하지 않음 */
-    flex: none;
-    width: 100%;
-  }
 
     /* 이메일 입력창과 버튼도 한 열로 배치 */
   form {
