@@ -218,6 +218,7 @@ button:active{
     /* 모바일에서도 버튼의 누르는 영역이 너무 낮아지지 않게 설정 */
     min-height: 48px;
   }
+}
 
   #subscribeMessage{
     margin-top: 16px;
@@ -237,4 +238,3 @@ button:active{
     background-color: #a8a8b2;
     cursor: not-allowed;
   }
-}

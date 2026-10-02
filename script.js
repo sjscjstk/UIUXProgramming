@@ -2,7 +2,7 @@ const serviceName = "Re:hear";
 let isSubcribed = false;
 let submitCount = 0;
 
-function makeSubcribeMessage(email, subscribed) {
+function makeSubscribeMessage(email, subscribed) {
     if (subscribed == true) {
         return email + "로 신청이 완료되었습니다.";
     }
@@ -31,7 +31,7 @@ function handleSubscribe(event) {
     submitCount += 1;
 
     subscribeMessage.textContent =
-        makeSubcribeMessage(subscriberEmail, isSubcribed);
+        makeSubscribeMessage(subscriberEmail, isSubcribed);
 
     subscribeMessage.classList.add("is-success");
 
