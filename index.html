@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Re:hear</title>
+    <title>Smoke Free</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"  rel="stylesheet">
-    <link rel="stylesheet" href="style.css"
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -40,20 +40,64 @@
 
     <section id="features">
       <h2>주요 기능</h2>
-          <ul class="features-list">
-            <li class="feature-card">
-              <h3>간편 검색 기능</h3>
-              <p>금연구역을 간편하게 검색할 수 있습니다.</p>
-            </li>
-            <li class="feature-card">
-              <h3>상세 검색 기능</h3>
-              <p>시도명, 관리기관 등 여러 항목을 선택하여 상세히 검색할 수 있습니다.</p>
-            </li>
-            <li class="feature-card">
-              <h3>엑셀 저장 기능</h3>
-              <p>조회한 데이터를 엑셀파일로 다운로드 할 수 있습니다.</p>
-            </li>
-          </ul>
+
+      <div class="tabs" role="tablist" aria-label="기능 선택">
+        <button id="tab-practice"
+                class="tab is-active"
+                type="button"
+                role="tab"
+                aria-selected="true"
+                aria-controls="feature-practice"
+                data-target="#feature-practice">
+                간편 검색 기능
+        </button>
+
+        <button id="tab-audience"
+                class="tab"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="feature-audience"
+                data-target="#feature-audience">
+                상세 검색 기능
+        </button>
+
+        <button id="tab-feedback"
+                class="tab"
+                type="button"
+                role="tab"
+                aria-selected="false"
+                aria-controls="feature-feedback"
+                data-target="#feature-feedback">
+                엑셀 저장 기능
+        </button>
+  </div>
+
+  <div id="feature-practice"
+       class="panel is-active"
+       role="tabpanel"
+       aria-labelledby="tab-practice">
+      <h3>간편 검색 기능</h3>
+      <p>금연구역을 간편하게 검색할 수 있습니다.</p>
+  </div>
+
+  <div id="feature-audience"
+       class="panel"
+       role="tabpanel"
+       aria-labelledby="tab-audience"
+       hidden>
+      <h3>상세 검색 기능</h3>
+      <p>시도명, 관리기관 등 여러 항목을 선택하여 상세히 검색할 수 있습니다.</p>
+  </div>
+
+  <div id="feature-feedback"
+       class="panel"
+       role="tabpanel"
+       aria-labelledby="tab-feedback"
+       hidden>
+    <h3>엑셀 저장 기능</h3>
+    <p>조회한 데이터를 엑셀파일로 다운로드 할 수 있습니다.</p>
+  </div>
     </section>
 
     <section id="steps">
@@ -64,6 +108,38 @@
             <li>검색 버튼을 눌러 결과를 확인합니다.</li>
             <li>다운로드 버튼을 눌러 엑셀파일로 결과를 확인합니다.</li>
           </ol>
+    </section>
+
+    <section id="event-practice">
+      <h2>사용자 설정</h2>
+
+      <div class="event-grid">
+        <article class="event-card">
+          <h3>화면 테마</h3>
+          <button id="themeButton" type="button">다크테마로 바꾸기</button>
+        </article>
+
+        <article class="event-card">
+          <h3>사용자 정보</h3>
+          <label for="nickname">사용자 이름</label>
+          <input type="text" id="nickname" maxlength="10">
+          <p id="nicknameCount" aria-live="polite">0 / 10</p>
+        </article>
+
+        <article class="event-card">
+          <h3>위치 정보 제공 동의</h3>
+          <label class="agree-row">
+            <input type="checkbox" id="agreeCheck">
+              금연구역 안내 이용약관에 동의합니다.
+          </label>
+            <p id="agreeMessage" aria-live="polite">
+              약관 동의 후 서비스를 시작할 수 있습니다.
+            </p>
+            <button id="startButton" type="button" disabled>
+              서비스 시작하기
+            </button>
+        </article>
+      </div>
     </section>
 
     <section id="subscribe" class="subscribe-card">
