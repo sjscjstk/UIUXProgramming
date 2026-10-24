@@ -269,7 +269,7 @@ async function fetchSmokingZones() {
     const textData = await response.text();
     const data = JSON.parse(textData);
 
-    // 공공데이터포털의 유연한 데이터 구조에 맞게 items 배열 추출
+    // 3. 공공데이터포털의 유연한 데이터 구조에 맞게 items 배열 추출
     let items = [];
     if (data.response && data.response.body && data.response.body.items) {
       items = data.response.body.items;
@@ -292,7 +292,7 @@ async function fetchSmokingZones() {
       items = [];
     }
 
-    // 정상적으로 가져온 결과 화면에 출력
+    // 4. 정상적으로 가져온 결과 화면에 출력
     searchLoading.hidden = true;
     items.forEach(item => {
       const li = document.createElement("li");
