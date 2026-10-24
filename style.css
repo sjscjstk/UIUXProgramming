@@ -460,7 +460,6 @@ body.dark .training-flow{
   font-size: 14px;
 }
 
-/* 다크 테마 대응 */
 body.dark .status-message { background-color: #2d2e38; }
 body.dark .result-item { background-color: #2d2e38; border-color: #50515f; }
 body.dark .result-item strong { color: #b9b5ff; }
@@ -498,7 +497,6 @@ body.dark .result-item small { background-color: #50515f; color: #f4f4f8; }
   word-break: keep-all; 
 }
 
-/* 다크 테마 추가 대응 */
 body.dark .result-title { 
   border-bottom-color: #50515f; 
   color: #b9b5ff; 
