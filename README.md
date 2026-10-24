@@ -20,5 +20,8 @@
 ## 향후 계획
  - 간편 검색 기능, 상세 검색 기능 중 검색 결과 갯수, 시설 유형 선택 검색 구현 예정
 
+##  GitHub 저장소 주소
+ - https://github.com/sjscjstk/UIUXProgramming
+
 ##  배포된 웹페이지 주소
  - https://sjscjstk.github.io/UIUXProgramming/
