@@ -402,3 +402,106 @@ body.dark .training-flow{
   background-color: #50515f;
   border-color: #2d2e38;
 }
+
+/* 검색 결과 상태 메시지 및 리스트 스타일 */
+.status-message {
+  padding: 32px 24px;
+  text-align: center;
+  background-color: #f4f3ff;
+  border-radius: 12px;
+  margin: 24px 0;
+  font-weight: 700;
+}
+
+.results-list {
+  list-style: none;
+  padding: 0;
+  margin: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* 결과가 많을 경우 스크롤 생성 */
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.result-item {
+  padding: 20px;
+  border: 1px solid #deddea;
+  border-radius: 12px;
+  background-color: #ffffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.result-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.result-item strong {
+  display: block;
+  color: #6d0385;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.result-item p {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #292a31;
+}
+
+.result-item small {
+  display: inline-block;
+  padding: 4px 8px;
+  background-color: #f4f3ff;
+  border-radius: 6px;
+  color: #555763;
+  font-size: 14px;
+}
+
+/* 다크 테마 대응 */
+body.dark .status-message { background-color: #2d2e38; }
+body.dark .result-item { background-color: #2d2e38; border-color: #50515f; }
+body.dark .result-item strong { color: #b9b5ff; }
+body.dark .result-item p { color: #d8d8e2; }
+body.dark .result-item small { background-color: #50515f; color: #f4f4f8; }
+
+/* 17개 상세 항목 표출을 위한 레이아웃 스타일 */
+.result-title {
+  color: #6d0385;
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #f4f3ff;
+}
+
+.result-details {
+  display: grid;
+  /* 항목명(dt)은 140px 고정, 내용(dd)은 남은 영역 모두 사용 */
+  grid-template-columns: 140px 1fr;
+  row-gap: 8px;
+  margin: 0;
+  font-size: 15px;
+}
+
+.result-details dt {
+  font-weight: 700;
+  color: #555763;
+}
+
+.result-details dd {
+  margin: 0;
+  color: #292a31;
+  /* 텍스트가 길어질 경우 단어 단위로 줄바꿈 */
+  word-break: keep-all; 
+}
+
+/* 다크 테마 추가 대응 */
+body.dark .result-title { 
+  border-bottom-color: #50515f; 
+  color: #b9b5ff; 
+}
+body.dark .result-details dt { color: #a8a8b2; }
+body.dark .result-details dd { color: #d8d8e2; }
