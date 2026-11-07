@@ -1,33 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
-    
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smoke Free</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap"  rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="흡연 구역을 피하고 쾌적한 환경을 유지할 수 있으며, 특히 어린이 보호구역이나 공공장소에서의 흡연 예방 효과가 증대">
+  <title>Smoke Free | 전국 금연구역 조회 서비스</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260925-2">
+  <script src="script.js?v=20260925-2" defer></script>
 </head>
 
 <body>
-
-    <header>
-      <h1>전국 금연구역 조회 서비스</h1>
-      <p>흡연 구역을 피하고 쾌적한 환경을 유지할 수 있으며, 특히 어린이 보호구역이나 공공장소에서의 흡연 예방 효과가 증대됩니다.</p>
-    
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="Smoke Free 맨 위로"><img src="assets/images/header-footer.png" alt="Smoke Free" width="512" height="124"></a>
       <nav aria-label="주요 메뉴">
-        <a href="#about">서비스 소개</a>
-        <a href="#features">주요 기능</a>
-        <a href="#steps">이용 방법</a>
-        <a href="#subscribe">소식 받기</a>
-      </nav>
+            <a href="#about">서비스 소개</a>
+            <a href="#features">주요 기능</a>
+            <a href="#steps">이용 방법</a>
+            <a href="#event-practice">상세 검색</a>
+            <a href="#archive-search">내 검색 정보</a>
+            <a href="#subscribe">소식 받기</a>
+            </nav>
+          <button id="themeButton" class="theme-button" type="button" aria-pressed="false">다크 모드</button>
+        </div>
     </header>
 
-    <main>
-      
+    <main id="top">
     <section id="about">
         <h2>서비스 소개</h2>
         <h3>실외 금연구역의 주소·면적·과태료·관리기관 등의 정보를 조회할 수 있는 서비스</h3>
@@ -111,13 +112,7 @@
     </section>
 
     <section id="event-practice">
-      <h2>사용자 설정</h2>
-
-      <div class="event-grid">
-        <article class="event-card">
-          <h3>화면 테마</h3>
-          <button id="themeButton" type="button">다크테마로 바꾸기</button>
-        </article>
+      <h2>상세 검색</h2>
 
         <article class="event-card">
           <h3>사용자 정보</h3>
@@ -139,7 +134,6 @@
               서비스 시작하기
             </button>
         </article>
-      </div>
     </section>
 
     <dialog id="recording-dialog" aria-labelledby="recording-title" aria-describedby="recording-description">
@@ -152,67 +146,179 @@
     </dialog>
 
     <section id="training-flow" class="training-flow" hidden>
-      <h2>서비스 시작 설정</h2>
-      <p class="progress" aria-label="설정 진행 단계">
-        <span class="progress_item">1 · 정보</span>
-        <span class="progress_item">2 · 조건</span>
-        <span class="progress_item">3 · 확인</span>
-      </p>
+      <!-- 1. 과제 스타일의 첫 번째 화면 (Hero 배너) -->
+      <div class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">SMOKE FREE ZONE SEARCH</p>
+          <h1 id="hero-title">검색할 장소를<br><em>입력해 주세요.</em></h1>
+          <p class="hero-description">조회할 시군구명을 입력하고 상세 검색을 시작하세요. 검색 결과 갯수와 시설 유형 조건을 설정하여 원하는 금연구역 정보를 확인할 수 있습니다.</p>
+          
+          <div class="hero-field">
+            <label for="hero-title-input">시군구명</label>
+            <input id="hero-title-input" type="text" placeholder="예: 관악구" aria-describedby="hero-title-error">
+            <p id="hero-title-error" class="hero-field-error" role="alert" aria-live="polite"></p>
+          </div>
 
-      <section class="step" data-step="1" hidden>
-        <h3>검색할 장소를 입력해 주세요.</h3>
-        <label for="presentation-title">시군구명</label>
-        <input id="presentation-title" type="text" placeholder="예: 관악구" aria-describedby="title-error">
-        <p id="title-error" class="error-message" aria-live="polite"></p>
-        <button id="title-next" type="button">검색 조건 선택하기</button>
-      </section>
-
-      <section class="step" data-step="2" hidden>
-        <h3>검색 조건을 선택해 주세요.</h3>
-        <label for="duration-range">검색 결과 갯수</label>
-        <input id="duration-range" type="range" min="0" max="2" step="1" value="1">
-        <output id="duration-value" for="duration-range">100개</output>
-        <label><input type="checkbox" id="qna-option">상세 시설 유형 조건 포함</label>
-        <fieldset id="qna-options" hidden>
-          <legend>시설 유형 선택</legend>
-          <label><input type="radio" name="qna-count" value="1">공공/청사시설</label>
-          <label><input type="radio" name="qna-count" value="2" checked>교육/어린이시설</label>
-          <label><input type="radio" name="qna-count" value="3">다중이용시설(공원·정류장)</label>
-        </fieldset>
-        <div class="step-actions">
-          <button id="option-prev" type="button">이전</button>
-          <button id="option-next" type="button">검색 조건 확인</button>
+          <button id="hero-start-button" class="button button-primary" type="button">상세 검색하기 <span aria-hidden="true">↗</span></button>
+          <p class="hero-note">전국 금연구역 표준데이터(공공데이터포털 Open API)를 기반으로 조회합니다.</p>
         </div>
-      </section>
+        <figure class="hero-image">
+          <img src="assets/images/service.jpg" alt="전국 금연구역 조회 서비스" width="1920" height="1080">
+          <figcaption>Smoke Free 금연구역 조회 서비스</figcaption>
+        </figure>
+      </div>
 
-      <section class="step" data-step="3" hidden>
-        <h3>입력 및 선택한 내용을 확인해 주세요.</h3>
-        <div class="summary-list">
-          <div><span>검색 지역</span><strong id="summary-title"></strong></div>
-          <div><span>검색 결과 갯수</span><strong id="summary-duration"></strong></div>
-          <div><span>시설 유형 조건</span><strong id="summary-qna"></strong></div>
-        </div>
-        <div class="step-actions">
-          <button id="summary-prev" type="button">수정하기</button>
-          <button id="finish-button" type="button">검색 결과 확인 하기</button>
-        </div>
-      </section>
-
-      <section class="step complete-step" data-step="4" hidden>
-        <h3>금연구역 검색 결과</h3>
-        <p>입력하신 <strong><span id="result-keyword"></span></strong> 주변의 검색 결과입니다.</p>
-        
-        <!-- 검색 결과 및 상태 표시 영역 -->
-        <div id="search-results-container" aria-live="polite">
-          <p id="search-loading" class="status-message">공공데이터를 불러오는 중입니다...</p>
-          <ul id="search-results-list" class="results-list" hidden></ul>
-          <p id="search-empty" class="status-message error-message" hidden></p>
+      <!-- 2. 과제 스타일의 단계별 설정 화면 (Planner 카드) -->
+      <div id="planner" class="planner-section" hidden>
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">SEARCH OPTIONS</p>
+            <h2 id="planner-title">검색 조건 정보 입력</h2>
+          </div>
+          <p>이전 단계로 돌아가도 입력한 검색 조건은 그대로 유지됩니다.</p>
         </div>
 
-        <div class="step-actions">
-          <button id="restart-button" type="button">조건 다시 설정하기</button>
+        <div class="planner-card">
+          <ol class="progress" aria-label="검색 조건 설정 진행 단계">
+            <li class="progress-item is-current" aria-current="step"><span>1</span> 검색 정보</li>
+            <li class="progress-item"><span>2</span> 검색 조건</li>
+            <li class="progress-item"><span>3</span> 내용 확인</li>
+          </ol>
+
+          <form id="plan-form" novalidate>
+            <!-- STEP 01: 검색 정보 -->
+            <div class="flow-step step" data-step="1">
+              <p class="step-kicker">STEP 01 / 검색 정보</p>
+              <h3>어느 지역의 금연구역을 조회할까요?</h3>
+              <p class="step-description">검색할 시군구명과 사용자 이름을 확인하거나 수정해 주세요.</p>
+              <div class="field">
+                <label for="presentation-title">시군구명 <span class="required">필수</span></label>
+                <input id="presentation-title" name="title" type="text" maxlength="60" placeholder="예: 관악구" autocomplete="off" aria-describedby="title-help title-status title-error">
+                <p id="title-help" class="field-help">한글로 시·군·구 이름을 2글자 이상 입력해 주세요. (예: 관악구, 가평군)</p>
+                <p id="title-status" class="field-status" aria-live="polite"></p>
+                <p id="title-error" class="field-error" role="alert"></p>
+              </div>
+              <div class="field">
+                <label for="flow-nickname">사용자 이름 <span class="optional">선택</span></label>
+                <input id="flow-nickname" name="nickname" type="text" maxlength="10" placeholder="예: 민지" autocomplete="off" aria-describedby="flow-nickname-help flow-nickname-count flow-nickname-error">
+                <p id="flow-nickname-help" class="field-help">입력하지 않아도 되고, 입력한다면 2~10자로 적어 주세요.</p>
+                <p id="flow-nickname-count" class="field-status" aria-live="polite">0 / 10자</p>
+                <p id="flow-nickname-error" class="field-error" role="alert"></p>
+              </div>
+              <div class="step-actions step-actions-end">
+                <button id="title-next" class="button button-primary" type="button">검색 조건 선택하기 <span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+
+            <!-- STEP 02: 검색 조건 -->
+            <div class="flow-step step" data-step="2" hidden>
+              <p class="step-kicker">STEP 02 / 검색 조건</p>
+              <h3>어떤 조건으로 검색할까요?</h3>
+              <p class="step-description">검색 결과 표시 갯수와 상세 시설 유형 포함 여부를 선택하세요.</p>
+              
+              <fieldset class="field choice-fieldset">
+                <legend>검색 결과 갯수</legend>
+                <div class="duration-options">
+                  <label class="choice-card">
+                    <input type="radio" name="duration" value="50">
+                    <span><strong>50개</strong><small>빠르게 핵심만 조회</small></span>
+                  </label>
+                  <label class="choice-card">
+                    <input type="radio" name="duration" value="100" checked>
+                    <span><strong>100개</strong><small>기본 검색 갯수</small></span>
+                  </label>
+                  <label class="choice-card">
+                    <input type="radio" name="duration" value="전체">
+                    <span><strong>전체</strong><small>최대 1,000건 전체</small></span>
+                  </label>
+                </div>
+              </fieldset>
+
+              <div class="field qna-field">
+                <label class="check-row" for="qna-option">
+                  <input id="qna-option" type="checkbox">
+                  <span>
+                    <strong>상세 시설 유형 조건 포함</strong>
+                    <small>조회할 금연구역의 시설 분류를 추가로 지정할 수 있습니다.</small>
+                  </span>
+                </label>
+                <fieldset id="qna-options" class="qna-options" hidden>
+                  <legend>시설 유형 선택</legend>
+                  <div class="inline-options">
+                    <label><input type="radio" name="qna-count" disabled value="공공/청사시설"> 공공/청사시설</label>
+                    <label><input type="radio" name="qna-count" disabled value="교육/어린이시설" checked> 교육/어린이시설</label>
+                    <label><input type="radio" name="qna-count" disabled value="다중이용시설(공원·정류장)"> 다중이용시설(공원·정류장)</label>
+                  </div>
+                </fieldset>
+              </div>
+
+              <div class="step-actions">
+                <button id="option-prev" class="button button-secondary" type="button">이전 단계</button>
+                <button id="option-next" class="button button-primary" type="button">검색 조건 확인 <span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+
+            <!-- STEP 03: 내용 확인 -->
+            <div class="flow-step step" data-step="3" hidden>
+              <p class="step-kicker">STEP 03 / 내용 확인</p>
+              <h3>입력 및 선택한 내용을 확인해 주세요.</h3>
+              <p class="step-description">내용을 확인한 뒤 저장하고 결과를 조회하세요. 수정 버튼으로 해당 단계로 돌아갈 수 있습니다.</p>
+              <dl class="summary-list">
+                <div><dt>검색 지역</dt><dd id="summary-title"></dd></div>
+                <div><dt>사용자 이름</dt><dd id="summary-nickname"></dd></div>
+                <div><dt>검색 결과 갯수</dt><dd id="summary-duration"></dd></div>
+                <div><dt>시설 유형 조건</dt><dd id="summary-qna"></dd></div>
+              </dl>
+              <p id="submit-status" class="submit-status" role="status" aria-live="polite"></p>
+              <div class="step-actions">
+                <div class="edit-actions">
+                  <button id="edit-info" class="button button-text" type="button">정보 수정</button>
+                  <button id="edit-options" class="button button-text" type="button">조건 수정</button>
+                </div>
+                <!-- 텍스트 변경 -->
+                <button id="finish-button" class="button button-primary" type="submit">검색 결과 저장 및 확인하기 <span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+
+            <!-- STEP 04: 금연구역 검색 결과 및 저장 완료 안내 -->
+            <div class="flow-step step complete-step" data-step="4" hidden>
+              <div class="complete-mark" aria-hidden="true">✓</div>
+              <p class="step-kicker">검색 및 조건 저장 완료</p>
+              <h3>검색 조건이 안전하게 보관되었습니다.</h3>
+              <p>입력하신 <strong><span id="result-keyword"></span></strong> 주변의 공공데이터 검색 결과입니다. 저장된 조건은 아래 <strong>'내 금연구역 검색'</strong>에서 다시 확인할 수 있습니다.</p>
+              
+              <div class="complete-actions">
+                <a class="button button-primary" href="#archive-search">내 금연구역 검색 보기 <span aria-hidden="true">↗</span></a>
+                <button id="restart-button" class="button button-secondary" type="button">새 조건 설정하기</button>
+              </div>
+
+              <div id="search-results-container" class="search-results-wrapper" aria-live="polite" style="width: 100%; margin-top: 40px;">
+                <p id="search-loading" class="status-message">공공데이터를 불러오는 중입니다...</p>
+                <ul id="search-results-list" class="results-list" hidden></ul>
+                <p id="search-empty" class="status-message error-message" hidden></p>
+              </div>
+            </div>
+          </form>
         </div>
-      </section>
+      </div>
+    </section>
+
+    <section id="archive-search" class="section container archive-section" aria-labelledby="archive-title" style="margin-top: 88px; padding-bottom: 40px;">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">MY SEARCH ARCHIVE</p>
+          <h2 id="archive-title">내 검색 정보<span id="plan-count" class="count-badge">0</span></h2>
+        </div>
+        <p>저장한 검색 조건을 다시 열어보거나 취소할 수 있습니다. 내용은 이 브라우저에만 보관됩니다.</p>
+      </div>
+      <p id="archive-status" class="archive-status" role="status" aria-live="polite"></p>
+      <div id="empty-state" class="empty-state" style="padding: 52px 24px; border: 1px dashed #c9d2e5; border-radius: 18px; background: var(--surface); text-align: center;">
+        <span class="empty-icon" aria-hidden="true" style="display: inline-grid; place-items: center; width: 47px; height: 47px; margin-bottom: 17px; border-radius: 13px; color: #0647f9; background: #edf0ff; font-size: 26px;">↗</span>
+        <h3>아직 저장한 검색 기록이 없어요.</h3>
+        <p>상세 검색에서 첫 금연구역 검색을 하면 이곳에서 다시 볼 수 있습니다.</p>
+        <a class="button button-secondary" href="#event-practice" style="display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 11px 20px; border: 1px solid var(--line); border-radius: 10px; font-weight: 800; text-decoration: none;">검색 조건 만들러 가기</a>
+      </div>
+      <ul id="plan-list" class="plan-list" aria-label="저장한 검색 기록" hidden style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding: 0; margin: 0; list-style: none;"></ul>
     </section>
 
     <section id="subscribe" class="subscribe-card">
@@ -226,14 +332,30 @@
               이메일을 입력한 뒤 신청해주세요.
             </p>
     </section>
+
   </main>
 
-  <footer>
-    <small>© 2026 전국 금연구역 조회 서비스</small>
+  <!-- 저장된 검색 기록 상세 내용 보기 모달 다이얼로그 -->
+  <dialog id="plan-dialog" class="plan-dialog" aria-labelledby="dialog-title" style="width: min(100% - 32px, 520px); max-width: none; padding: 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); color: var(--ink); box-shadow: 0 24px 70px rgba(10, 20, 55, .25);">
+    <div class="dialog-top" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+      <p class="eyebrow" style="margin: 0; color: #0647f9; font-size: 12px; font-weight: 800; text-transform: uppercase;">저장된 검색 기록</p>
+      <button id="dialog-close" class="icon-button" type="button" aria-label="닫기" style="width: 37px; height: 37px; border: 0; border-radius: 9px; background: #f3f6ff; color: var(--ink); font-size: 20px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer;">✕</button>
+    </div>
+    <h2 id="dialog-title" style="margin-bottom: 8px; font-size: 24px; font-weight: 800; overflow-wrap: anywhere;"></h2>
+    <p id="dialog-status" class="dialog-status" style="margin-bottom: 24px; font-size: 13px; color: var(--muted);"></p>
+    <dl class="summary-list" style="margin: 0; border-top: 1px solid var(--line);">
+      <div style="display: flex; justify-content: space-between; gap: 24px; padding: 15px 3px; border-bottom: 1px solid var(--line);"><dt style="color: var(--muted); font-size: 14px;">사용자 이름</dt><dd id="dialog-nickname" style="margin: 0; color: var(--ink); font-weight: 800; text-align: right;"></dd></div>
+      <div style="display: flex; justify-content: space-between; gap: 24px; padding: 15px 3px; border-bottom: 1px solid var(--line);"><dt style="color: var(--muted); font-size: 14px;">검색 결과 갯수</dt><dd id="dialog-duration" style="margin: 0; color: var(--ink); font-weight: 800; text-align: right;"></dd></div>
+      <div style="display: flex; justify-content: space-between; gap: 24px; padding: 15px 3px; border-bottom: 1px solid var(--line);"><dt style="color: var(--muted); font-size: 14px;">시설 유형 조건</dt><dd id="dialog-qna" style="margin: 0; color: var(--ink); font-weight: 800; text-align: right;"></dd></div>
+    </dl>
+    <button id="dialog-done" class="button button-primary" type="button" style="width: 100%; margin-top: 25px; min-height: 48px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; color: #fff; background: #0647f9; font-weight: 800; border: 0; cursor: pointer;">확인했어요</button>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="container">
+    <span class="brand"><img src="assets/images/header-footer.png" alt="Smoke Free" width="512" height="124"></span>
+    <small>전국 금연구역 조회 서비스 · 2026</small>
+    </div>
   </footer>
-
-  <script src="script.js"></script>
-  
   </body>
-
 </html>
