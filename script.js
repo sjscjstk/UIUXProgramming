@@ -43,21 +43,18 @@ function handleSubscribe(event) {
 
 subscribeForm.addEventListener("submit", handleSubscribe);
 
-const themeButton = document.querySelector("#themeButton");
+const themeButton = document.querySelector("#theme-button");
+  themeButton.addEventListener("click", () => {
+    const dark = document.body.classList.toggle("dark");
+    themeButton.textContent = dark ? "라이트 모드" : "다크 모드";
+    themeButton.setAttribute("aria-pressed", String(dark));
+  });
+
 const nicknameInput = document.querySelector("#nickname");
 const nicknameCount = document.querySelector("#nicknameCount");
 const agreeCheck = document.querySelector("#agreeCheck");
 const agreeMessage = document.querySelector("#agreeMessage");
 const startButton = document.querySelector("#startButton");
-
-function handleThemeClick() {
-  const isDark = document.body.classList.toggle("dark");
-
-  themeButton.textContent = isDark ? "라이트 모드" : "다크 모드";
-  themeButton.setAttribute("aria-pressed", String(isDark));
-}
-
-themeButton.addEventListener("click", handleThemeClick);
 
 function handleNicknameInput() {
   const maxLength = nicknameInput.maxLength;
@@ -210,7 +207,6 @@ recordingConfirm.addEventListener("click", () => {
   heroTitleInput.focus();
 });
 
-// 1. 첫 번째 배너(Hero)에서 시군구명 입력 후 [상세 검색하기] 클릭 시
 heroStartButton.addEventListener("click", () => {
   const value = heroTitleInput.value.trim();
   const message = getTitleError(value);
@@ -227,7 +223,6 @@ heroStartButton.addEventListener("click", () => {
   setFieldError(titleInput, titleError, "");
   updateTitleFeedback();
 
-  // 메인 화면의 사용자 이름을 1단계 입력창에도 반영
   if (nicknameInput && flowNicknameInput) {
     flowNicknameInput.value = nicknameInput.value;
     setFieldError(flowNicknameInput, flowNicknameError, "");
@@ -243,7 +238,6 @@ heroStartButton.addEventListener("click", () => {
 flowNicknameInput.addEventListener("input", updateNicknameFeedback);
 titleInput.addEventListener("input", updateTitleFeedback);
 
-// 입력하는 동안: 오류가 표시된 상태에서 올바르게 고치면 오류 해제
 heroTitleInput.addEventListener("input", () => {
   if (!heroTitleError.textContent) return;
   const message = getTitleError(heroTitleInput.value.trim());
@@ -258,7 +252,6 @@ heroTitleInput.addEventListener("keydown", (event) => {
   }
 });
 
-// ---------- 입력 검증 ----------
 function getTitleError(value) {
   if (!value) return "시군구명을 입력해 주세요. 예: 관악구";
   if (/[^가-힣0-9\s]/.test(value)) return "한글 시군구명만 입력할 수 있어요. 영문·특수문자를 지우고 다시 입력해 주세요.";
@@ -283,7 +276,6 @@ function setFieldError(input, errorEl, message) {
   }
 }
 
-// 입력하는 동안 글자 수와 조건 충족 여부를 문구로 표시
 function updateTitleFeedback() {
   const value = titleInput.value.trim();
   const message = getTitleError(value);
@@ -296,7 +288,6 @@ function updateTitleFeedback() {
   } else {
     titleStatus.textContent = `✓ ${value.length}자 입력 · 입력 조건을 충족했어요.`;
   }
-  // 이미 오류가 표시된 상태라면 고치는 즉시 오류 문구 갱신/해제
   if (titleError.textContent) setFieldError(titleInput, titleError, message);
 }
 
@@ -344,7 +335,6 @@ titleNext.addEventListener("click", () => {
   showStep(1);
 });
 
-// ---------- 조건부 입력: 표시/숨김 + 입력 가능(disabled) 상태를 함께 변경 ----------
 function setQnaOpen(open) {
   qnaOptions.hidden = !open;
   qnaOptions.disabled = !open;
@@ -409,17 +399,22 @@ const planCount = document.querySelector("#plan-count");
 const archiveStatus = document.querySelector("#archive-status");
 const planDialog = document.querySelector("#plan-dialog");
 
-// ---------- 폼 제출 (submit 이벤트) ----------
+const navLinks = document.querySelectorAll(".main-nav a");
+
+const menuToggle = document.querySelector("#menu-toggle");
+const mainNav = document.querySelector("#main-nav");
+
+const filterButtons = document.querySelectorAll(".filter-button");
+let currentFilter = "all";
+
 planForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  if (isSubmitting) return; // 제출 중 중복 제출 방지
+  if (isSubmitting) return;
 
-  // 1·2단계에서 Enter 키를 눌렀을 때는 해당 단계의 '다음' 동작으로 처리
   if (currentStep === 0) { titleNext.click(); return; }
   if (currentStep === 1) { optionNext.click(); return; }
   if (currentStep !== 2) return;
 
-  // 조건 미충족 시 제출을 막고 수정이 필요한 1단계로 안내
   const titleMessage = getTitleError(titleInput.value.trim());
   const nicknameMessage = getNicknameError(flowNicknameInput.value.trim());
   if (titleMessage || nicknameMessage) {
@@ -431,7 +426,6 @@ planForm.addEventListener("submit", (event) => {
   }
   formData.title = titleInput.value.trim();
 
-  // 제출 중: 진행 문구 표시 + 버튼 비활성화
   isSubmitting = true;
   finishButton.disabled = true;
   finishButton.setAttribute("aria-busy", "true");
@@ -451,16 +445,14 @@ planForm.addEventListener("submit", (event) => {
 
     savedSearchPlans.unshift(currentPlan);
     if (!savePlans()) {
-      // 실패: 입력 내용은 그대로 두고 다시 시도할 수 있게 복구
       savedSearchPlans.shift();
       isSubmitting = false;
       finishButton.disabled = false;
       finishButton.removeAttribute("aria-busy");
-      setSubmitMessage("저장하지 못했습니다. 입력한 내용은 그대로 남아 있으니 '검색 결과 저장 및 확인하기'를 다시 눌러 주세요.", "error");
+      setSubmitMessage("저장하지 못했습니다. 입력한 내용은 그대로 남아 있으니 다시 시도해 주세요.", "error");
       return;
     }
 
-    // 성공: 완료 안내 + 검색 결과 조회
     isSubmitting = false;
     renderPlans();
     setSubmitMessage("", "");
@@ -477,19 +469,154 @@ function createText(tag, className, content) {
   return element;
 }
 
+const filterLabels = { all: "전체", active: "저장됨", cancelled: "취소됨" };
+const resultCount = document.querySelector("#result-count");
+
+const navTargets = Array.from(navLinks).map((link) => document.querySelector(link.getAttribute("href")));
+let navLockUntil = 0;
+let navTicking = false;
+
+function setCurrentLink(current) {
+  navLinks.forEach((link) => {
+    const isCurrent = link === current;
+    link.classList.toggle("is-current", isCurrent);
+    if (isCurrent) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
+  });
+}
+
+function findCurrentLinkByScroll() {
+  const header = document.querySelector(".site-header");
+  const line = (header ? header.offsetHeight : 0) + 40;
+  let current = navLinks[0];
+
+  navTargets.forEach((target, index) => {
+    if (target && target.getBoundingClientRect().top <= line) current = navLinks[index];
+  });
+
+  const lastTarget = navTargets[navTargets.length - 1];
+  const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+  if (atBottom && lastTarget && lastTarget.getBoundingClientRect().top < window.innerHeight * 0.6) {
+    current = navLinks[navLinks.length - 1];
+  }
+  return current;
+}
+
+function updateCurrentNav() {
+  if (Date.now() < navLockUntil) return;
+  setCurrentLink(findCurrentLinkByScroll());
+}
+
+function lockNav(link) {
+  if (link) setCurrentLink(link);
+  navLockUntil = Date.now() + 1200;
+  setTimeout(updateCurrentNav, 1250);
+}
+
+window.addEventListener("scroll", () => {
+  if (navTicking) return;
+  navTicking = true;
+  requestAnimationFrame(() => {
+    navTicking = false;
+    updateCurrentNav();
+  });
+}, { passive: true });
+
+window.addEventListener("hashchange", () => {
+  const link = Array.from(navLinks).find((item) => item.getAttribute("href") === window.location.hash);
+  lockNav(link);
+});
+window.addEventListener("load", updateCurrentNav);
+window.addEventListener("pageshow", updateCurrentNav);
+window.addEventListener("resize", updateCurrentNav);
+updateCurrentNav();
+
+function setMenuOpen(open) {
+  mainNav.classList.toggle("is-open", open);
+  menuToggle.textContent = open ? "메뉴 닫기" : "메뉴 열기";
+  menuToggle.setAttribute("aria-expanded", String(open));
+}
+
+menuToggle.addEventListener("click", () => {
+  setMenuOpen(!mainNav.classList.contains("is-open"));
+});
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    setMenuOpen(false);
+    lockNav(link);
+  });
+});
+
+window.matchMedia("(min-width: 801px)").addEventListener("change", (event) => {
+  if (event.matches) setMenuOpen(false);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && mainNav.classList.contains("is-open")) {
+    setMenuOpen(false);
+    menuToggle.focus();
+  }
+});
+
+function getVisiblePlans() {
+  return savedSearchPlans.filter((plan) => {
+    if (currentFilter === "all") return true;
+    if (currentFilter === "cancelled") return plan.cancelled;
+    return !plan.cancelled;
+  });
+}
+
 function renderPlans() {
-  if (!planList) return;
+  if (!planList || !emptyState) return;
+
+  const visiblePlans = getVisiblePlans();
+
   planList.replaceChildren();
-  if (emptyState) emptyState.hidden = savedSearchPlans.length !== 0;
-  planList.hidden = savedSearchPlans.length === 0;
-  
-  const activeCount = savedSearchPlans.filter((plan) => !plan.cancelled).length;
-  if (planCount) {
-    planCount.textContent = String(activeCount);
-    planCount.setAttribute("aria-label", `진행 중인 검색 기록 ${activeCount}개`);
+  emptyState.hidden = visiblePlans.length !== 0;
+  planList.hidden = visiblePlans.length === 0;
+
+  const total = savedSearchPlans.length;
+  const emptyTitle = emptyState.querySelector("h3");
+  const emptyDescription = emptyState.querySelector("p");
+  const emptyAction = emptyState.querySelector("a");
+  const filterLabel = filterLabels[currentFilter];
+
+  if (visiblePlans.length === 0) {
+    if (total === 0) {
+      if (emptyTitle) emptyTitle.textContent = "아직 저장한 검색 기록이 없어요.";
+      if (emptyDescription) emptyDescription.textContent = "상세 검색에서 첫 금연구역 검색을 하면 이곳에서 다시 볼 수 있습니다.";
+    } else {
+      if (emptyTitle) emptyTitle.textContent = "선택한 조건에 맞는 검색 기록이 없어요.";
+      if (emptyDescription) {
+        emptyDescription.textContent = `‘${filterLabel}’ 상태의 기록이 없습니다. 전체 ${total}개의 기록이 있으니 다른 상태를 선택해 보세요.`;
+      }
+    }
+    if (emptyAction) emptyAction.style.display = total === 0 ? "inline-flex" : "none";
   }
 
-  savedSearchPlans.forEach((plan) => {
+  if (resultCount) {
+    if (total === 0) {
+      resultCount.textContent = "저장된 검색 기록이 없습니다.";
+    } else if (currentFilter === "all") {
+      resultCount.textContent = `전체 ${total}개를 표시하고 있어요.`;
+    } else {
+      resultCount.textContent = `전체 ${total}개 중 ‘${filterLabel}’ ${visiblePlans.length}개를 표시하고 있어요.`;
+    }
+  }
+
+  if (planCount) {
+    planCount.textContent = String(visiblePlans.length);
+    planCount.setAttribute(
+      "aria-label",
+      `현재 표시 중인 검색 기록 ${visiblePlans.length}개`
+    );
+  }
+
+  visiblePlans.forEach((plan) => {
     const card = document.createElement("li");
     card.className = `plan-card${plan.cancelled ? " is-cancelled" : ""}`;
     card.style.cssText = "min-width: 0; padding: 23px; border: 1px solid var(--line); border-radius: 17px; background: var(--surface);";
@@ -540,6 +667,20 @@ function renderPlans() {
     planList.append(card);
   });
 }
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    currentFilter = button.dataset.filter;
+
+    filterButtons.forEach((item) => {
+      const selected = item === button;
+      item.classList.toggle("is-active", selected);
+      item.setAttribute("aria-pressed", String(selected));
+    });
+
+    renderPlans();
+  });
+});
 
 if (planList) {
   planList.addEventListener("click", (event) => {
@@ -608,7 +749,6 @@ const searchResultsList = document.querySelector("#search-results-list");
 const searchEmpty = document.querySelector("#search-empty");
 const resultKeyword = document.querySelector("#result-keyword");
 
-// 공공데이터 API 호출 및 결과 함수
 async function fetchSmokingZones() {
   searchLoading.hidden = false;
   searchResultsList.hidden = true;

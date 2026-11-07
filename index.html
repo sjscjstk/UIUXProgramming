@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="흡연 구역을 피하고 쾌적한 환경을 유지할 수 있으며, 특히 어린이 보호구역이나 공공장소에서의 흡연 예방 효과가 증대">
+  <meta name="description" content="흡연 구역을 피하고 쾌적한 환경을 유지할 수 있으며, 특히 어린이 보호구역이나 공공장소에서의 흡연 예방 효과 증대">
   <title>Smoke Free | 전국 금연구역 조회 서비스</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,17 +16,22 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#top" aria-label="Smoke Free 맨 위로"><img src="assets/images/header-footer.png" alt="Smoke Free" width="512" height="124"></a>
-      <nav aria-label="주요 메뉴">
-            <a href="#about">서비스 소개</a>
-            <a href="#features">주요 기능</a>
-            <a href="#steps">이용 방법</a>
-            <a href="#event-practice">상세 검색</a>
-            <a href="#archive-search">내 검색 정보</a>
-            <a href="#subscribe">소식 받기</a>
-            </nav>
-          <button id="themeButton" class="theme-button" type="button" aria-pressed="false">다크 모드</button>
-        </div>
-    </header>
+
+      <button id="menu-toggle" class="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false">메뉴 열기</button>
+
+      <nav id="main-nav" class="main-nav" aria-label="주요 메뉴">
+        <ul>
+          <li><a href="#about">서비스 소개</a></li>
+          <li><a href="#features">주요 기능</a></li>
+          <li><a href="#steps">이용 방법</a></li>
+          <li><a href="#event-practice">상세 검색</a></li>
+          <li><a href="#archive-search">내 검색 정보</a></li>
+          <li><a href="#subscribe">소식 받기</a></li>
+        </ul>
+      </nav>
+      <button id="theme-button" class="theme-button" type="button" aria-pressed="false">다크 모드</button>
+    </div>
+  </header>
 
     <main id="top">
     <section id="about">
@@ -102,13 +107,13 @@
     </section>
 
     <section id="steps">
-        <h2>이용 방법</h2>
-          <ol>
-            <li>검색할 단어를 검색칸에 입력합니다.</li>
-            <li>추가로 시도명, 시설 유형명 등 상세 검색 필요 시 상세기능 메뉴의 항목을 선택합니다.</li>
-            <li>검색 버튼을 눌러 결과를 확인합니다.</li>
-            <li>다운로드 버튼을 눌러 엑셀파일로 결과를 확인합니다.</li>
-          </ol>
+      <h2>이용 방법</h2>
+      <ol>
+        <li><strong>약관 동의 및 시작 :</strong> 상세 검색에서 사용자 이름(선택)을 입력하고 이용 약관에 동의한 뒤 서비스를 시작합니다.</li>
+        <li><strong>지역(시군구명) 입력 :</strong> 조회할 지역의 시군구명(예: 관악구, 가평군)을 한글 2글자 이상 입력합니다.</li>
+        <li><strong>검색 조건 설정 :</strong> 검색 결과 표시 갯수(50개·100개·전체)와 상세 시설 유형(공공·교육·다중이용시설) 조건을 선택합니다.</li>
+        <li><strong>결과 조회 및 기록 관리 :</strong> 금연구역 상세 정보(주소·면적·과태료 등)를 확인하고, 내 검색 정보에서 저장된 검색 기록을 상태별로 관리합니다.</li>
+      </ol>
     </section>
 
     <section id="event-practice">
@@ -273,7 +278,6 @@
                   <button id="edit-info" class="button button-text" type="button">정보 수정</button>
                   <button id="edit-options" class="button button-text" type="button">조건 수정</button>
                 </div>
-                <!-- 텍스트 변경 -->
                 <button id="finish-button" class="button button-primary" type="submit">검색 결과 저장 및 확인하기 <span aria-hidden="true">→</span></button>
               </div>
             </div>
@@ -283,7 +287,7 @@
               <div class="complete-mark" aria-hidden="true">✓</div>
               <p class="step-kicker">검색 및 조건 저장 완료</p>
               <h3>검색 조건이 안전하게 보관되었습니다.</h3>
-              <p>입력하신 <strong><span id="result-keyword"></span></strong> 주변의 공공데이터 검색 결과입니다. 저장된 조건은 아래 <strong>'내 금연구역 검색'</strong>에서 다시 확인할 수 있습니다.</p>
+              <p>입력하신 <strong><span id="result-keyword"></span></strong> 주변의 공공데이터 검색 결과입니다. 저장된 조건은 아래 <strong>'내 금연구역 검색 보기'</strong>에서 다시 확인할 수 있습니다.</p>
               
               <div class="complete-actions">
                 <a class="button button-primary" href="#archive-search">내 금연구역 검색 보기 <span aria-hidden="true">↗</span></a>
@@ -309,6 +313,17 @@
         </div>
         <p>저장한 검색 조건을 다시 열어보거나 취소할 수 있습니다. 내용은 이 브라우저에만 보관됩니다.</p>
       </div>
+
+      <div class="plan-filters" role="group" aria-label="검색 정보 표시 범위">
+        <button class="filter-button is-active"
+          type="button" data-filter="all" aria-pressed="true">전체</button>
+        <button class="filter-button"
+          type="button" data-filter="active" aria-pressed="false">저장됨</button>
+        <button class="filter-button"
+          type="button" data-filter="cancelled" aria-pressed="false">취소됨</button>
+      </div>
+
+      <p id="result-count" class="result-count" role="status" aria-live="polite"></p>
       <p id="archive-status" class="archive-status" role="status" aria-live="polite"></p>
       <div id="empty-state" class="empty-state" style="padding: 52px 24px; border: 1px dashed #c9d2e5; border-radius: 18px; background: var(--surface); text-align: center;">
         <span class="empty-icon" aria-hidden="true" style="display: inline-grid; place-items: center; width: 47px; height: 47px; margin-bottom: 17px; border-radius: 13px; color: #0647f9; background: #edf0ff; font-size: 26px;">↗</span>
@@ -333,7 +348,6 @@
 
   </main>
 
-  <!-- 저장된 검색 기록 상세 내용 보기 모달 다이얼로그 -->
   <dialog id="plan-dialog" class="plan-dialog" aria-labelledby="dialog-title" style="width: min(100% - 32px, 520px); max-width: none; padding: 26px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); color: var(--ink); box-shadow: 0 24px 70px rgba(10, 20, 55, .25);">
     <div class="dialog-top" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
       <p class="eyebrow" style="margin: 0; color: #0647f9; font-size: 12px; font-weight: 800; text-transform: uppercase;">저장된 검색 기록</p>
