@@ -380,7 +380,6 @@ optionNext.addEventListener("click", () => {
 editInfoButton.addEventListener("click", () => showStep(0));
 editOptionsButton.addEventListener("click", () => showStep(1));
 
-// --- 과제 스타일 아카이브(로컬스토리지 연동 및 모달 팝업) 로직 ---
 const storageKey = "smoke-free-search-plans-v1";
 
 function readPlans() {

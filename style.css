@@ -468,7 +468,6 @@ body.dark #recording-dialog { background: #50515f; color: #fff; }
   background-color: #ffffff;
 }
 
-/* 상세 검색 (과제 Hero + Planner 스타일 이식) */
 .training-flow[hidden],
 .training-flow [hidden] {
   display: none !important;
@@ -478,7 +477,6 @@ body.dark #recording-dialog { background: #50515f; color: #fff; }
   margin-top: 48px;
 }
 
-/* 1. Hero 배너 스타일 */
 .training-flow .hero {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
@@ -616,7 +614,6 @@ body.dark #recording-dialog { background: #50515f; color: #fff; }
   font-size: 11px;
 }
 
-/* 2. 과제 버튼 스타일 */
 .training-flow .button {
   min-height: 48px;
   display: inline-flex;
@@ -666,7 +663,6 @@ body.dark #recording-dialog { background: #50515f; color: #fff; }
   background: #f3f6ff;
 }
 
-/* 3. Planner 카드 (발표 훈련 계획 만들기 디자인) */
 .training-flow .planner-section {
   margin-top: 64px;
   scroll-margin-top: 100px;
